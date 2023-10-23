@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/Lexander1108/e-generator-Backend/issues"
   },
-  "homepage": "https://github.com/Lexander1108/e-generator-Backend#readme"
+  "homepage": "https://github.com/Lexander1108/e-generator-Backend#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "eslint": "^8.52.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
