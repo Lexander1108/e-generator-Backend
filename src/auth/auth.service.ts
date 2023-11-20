@@ -9,6 +9,8 @@ import {Repository} from "typeorm";
 @Injectable()
 export class AuthService {
     constructor(
+        @InjectRepository(User)
+        private userRepository: Repository<User>,
         private usersService: UsersService,
         private jwtService: JwtService,
     ) {}
