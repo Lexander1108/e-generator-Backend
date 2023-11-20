@@ -1,26 +1,23 @@
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { Strategy } from 'passport-google-oauth20';
-import {AuthService} from "../auth.service";
-
+import { Strategy, VerifyCallback } from 'passport-google-oauth20';
+import { ConfigService } from '@nestjs/config';
+import { AuthService } from '../auth.service';
+import {User} from "../../users/entities/user.entity";
+import {Repository} from "typeorm";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
-    constructor(private readonly authService: AuthService) {
+    constructor(
+        private authService: AuthService,
+        private configService: ConfigService
+    ) {
         super({
-            clientID: 'YOUR_GOOGLE_CLIENT_ID',
-            clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
-            callbackURL: 'YOUR_CALLBACK_URL',
-            passReqToCallback: true,
-            scope: ['profile', 'email'],
+            clientID: configService.get('GOOGLE_CLIENT_ID'),
+            clientSecret: configService.get('GOOGLE_CLIENT_SECRET'),
+            callbackURL: configService.get('GOOGLE_CALLBACK_URL'),
+            scope: ['email', 'profile'],
         });
-    }
-
-    async validate(request: any, accessToken: string, refreshToken: string, profile: any, done: Function) {
-        const user = await this.authService.validateOAuthLogin(profile);
-        if (!user) {
-            return done(new UnauthorizedException(), false);
-        }
-        done(null, user);
     }
 }
