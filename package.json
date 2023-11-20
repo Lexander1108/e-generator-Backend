@@ -37,7 +37,6 @@
     "dotenv": "^16.3.1",
     "joi": "^17.11.0",
     "joi-extract-type": "^15.0.8",
-    "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
