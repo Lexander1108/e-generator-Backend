@@ -17,14 +17,6 @@ export class AuthController {
         // return this.authService.login(req.user);
     }
 
-    @Post('callback')
-    async callback(@Req() req: Request) {
-        // Passport automatically attaches the user object to the request object after successful authentication
-        console.log(req);
-        // return this.authService.login(req.user);
-        return 'ok';
-    }
-
     @Post('signup')
     async signup(@Body() createUserDto: CreateUserDto) {
         // Implement the signup logic using the UsersService

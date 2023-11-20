@@ -7,8 +7,6 @@ import { ChatModule } from './chat/chat.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { validationSchema } from './config/validation.schema';
 import configuration from './config/configuration';
-import {ServeStaticModule} from "@nestjs/serve-static";
-import * as path from "path";
 
 @Module({
     imports: [
@@ -16,10 +14,6 @@ import * as path from "path";
         ConfigModule.forRoot({
             isGlobal: true, // Make ConfigModule global
             validationSchema,
-        }),
-        ServeStaticModule.forRoot({
-            rootPath: path.join(__dirname, '..', 'static'), // set the static folder
-            // You can add more options here if needed
         }),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
