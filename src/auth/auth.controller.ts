@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req, UseGuards, Get } from '@nestjs/common';
+import {Controller, Post, Body, Req, UseGuards, Get, HttpCode, HttpStatus} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -18,12 +18,11 @@ export class AuthController {
     }
 
     @Post('signup')
+    @HttpCode(HttpStatus.CREATED)
     async signup(@Body() createUserDto: CreateUserDto) {
-        // Implement the signup logic using the UsersService
-        // This is just a placeholder for the actual implementation
-        return 'Signup feature to be implemented';
+        const user = await this.authService.signup(createUserDto);
+        return { message: 'User successfully registered', user };
     }
-
     // Example of a route that requires authentication
     @UseGuards(JwtAuthGuard)
     @Get('profile')
