@@ -1,11 +1,9 @@
 import { Controller, Post, Body, Req, UseGuards, Get } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
-
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -40,16 +38,5 @@ export class AuthController {
     getProfile(@Req() req: Request) {
         console.log(req);
         // return req.user;
-    }
-
-    @Get('google')
-    async googleAuth(@Req() req) {
-        // Initiates the Google OAuth2 login flow
-    }
-
-    @Get('google/callback')
-    async googleAuthRedirect(@Req() req) {
-        // Handles the Google OAuth2 callback
-        return this.authService.validateUserFromGoogle(req);
     }
 }
